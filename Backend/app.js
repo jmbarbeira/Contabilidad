@@ -1,4 +1,4 @@
-const dotenv = require ('dotenv');
+const dotenv = require ('dotenv/types');
 dotenv.config({ path: './env/.env' });
 
 
