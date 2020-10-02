@@ -1,2 +1,6 @@
 env
 node_modules
+
+# e2e
+FrontEnd/e2e/*.js
+FrontEnd/e2e/*.map

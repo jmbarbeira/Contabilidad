@@ -1,0 +1,8 @@
+<h3>List of Clients</h3>
+<button class="btn btn-primary">New Client</button>
+<table class="table table-striped">
+  <thead><tr><th scope="col">Name</th><th scope="col">CIF</th></tr></thead>
+  <tr *ngFor='let client of clients'>
+    <td>{{client.name}}</td><td>{{client.cif}}</td>
+  </tr>
+</table>

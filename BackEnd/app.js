@@ -6,7 +6,8 @@ const express= require('express');
 const app = express();
 const bodyParser= require('body-parser');
 const mongoose = require ('mongoose');
-
+const cors = require('cors')
+app.use(cors('http://localhost:4200'))
 
 const appClient = require('./routes/client');
 const appInvoice = require('./routes/invoice');

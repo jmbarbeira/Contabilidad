@@ -1,0 +1,17 @@
+<h3>List of Invoices</h3>
+<button class="btn btn-primary">New Invoice</button>
+<table class="table table-striped">
+  <thead>
+  <tr><th scope="col">Invoice #</th><th scope="col">Client</th><th scope="col">Billing Date</th><th scope="col">Payment Date</th><th scope="col">total</th></tr>
+</thead>
+  <tr *ngFor='let invoice of invoices'>
+    <td>{{invoice.invoiceNumber}}</td>
+    <td>{{invoice.client.name}}</td>
+    <td>{{invoice.billingDate}}</td>
+    <td>{{invoice.PaymentDate}}</td>
+    <td>{{invoice.total}}</td>
+    <td><Button class="btn btn-primary">Get Invoice</Button></td>
+    <td><Button class="btn btn-danger">Delete Invoice</Button></td>
+  </tr>
+</table>
+
