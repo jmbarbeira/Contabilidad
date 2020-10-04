@@ -3,26 +3,25 @@ const app = express();
 const Invoice = require('../models/invoice');
 
 app.post('/',(req,res)=>{
+    let total=0
+    for(let i=0;i<req.body.items.length;i++){
+        total+=req.body.items[i].total
+    }
     let invoice = new Invoice({
-        client:{
-        name:req.body.name,
-        cif:req.body.cif,
-        location:req.body.location,
-        address:req.body.address},
-        billinDate: req.body.billingDate,
+        invoiceNumber:req.body.invoiceNumber,
+        client:req.body.client,
+        billingDate: req.body.billingDate,
         paymentDate: req.body.paymentDate,
-        items:req.body.items,
-        total: function (){
-            let total=0
-            req.body.items.forEach(element => {
-            total+=element.unitPrice*element.quantity; 
-            })
-        }
+         items:req.body.items,
+         total: total
 
     })
 
+    console.log(invoice)
+
     invoice.save((err,invoice)=>{
         if (err){
+            console.log(err)
             return res.status(400).json({error:err});
         }
         res.status(200).json({
@@ -34,9 +33,11 @@ app.post('/',(req,res)=>{
 
 app.get('/',(req,res)=>{
     Invoice.find({}).sort({name:1}).exec((err,invoices)=>{
+        
     if(err){
         return res.status(400).json({message:err})
     }
+  
     res.status(200).json({
         invoices:invoices
     })
@@ -57,11 +58,13 @@ app.get('/search/:param',(req,res)=>{
 })
 
 
-app.get('/:_id',(req,res)=>{
-    Invoice.findOne({_id: req.params._id},(err,invoice)=>{
+app.get('/:id',(req,res)=>{
+    Invoice.findOne({invoiceNumber: req.params.id},(err,invoice)=>{
         if(err){
+           // console.log(err)
             return res.status(400).json({message:err})
         }
+       // console.log(invoice)
         res.status(200).json({
             invoice:invoice
         })
@@ -96,7 +99,7 @@ app.put('/:_id',(req,res)=>{
 })
 
 app.delete('/:_id',(req,res)=>{
-    Invoice.findByIdAndDelete(req.params._id,(err,result)=>{
+    Invoice.deleteOne({invoiceNumber:req.params._id},(err,result)=>{
     if(err){
         return res.status(400).json({message:err})
     }

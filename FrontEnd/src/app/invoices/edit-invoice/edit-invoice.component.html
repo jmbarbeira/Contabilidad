@@ -1,0 +1,68 @@
+
+  <div class="card" style="width: 80rem;">
+    <div class="card-body">
+    <form [formGroup]="invoiceForm" (ngSubmit)="sendInvoice()">
+      <h5 class="card-title">New Invoice</h5>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <label for="name" class="col-form-label">Name</label>
+            <input type="text" class="formControl" id="name" formControlName="name" >
+          <label for="cif" class="col-form-label">CIF</label>
+          <input type="text" class="formControl" id="cif" formControlName="cif" >
+        </li>
+      <li class="list-group-item">
+        <label for="country" class="col-form-label">Country</label>
+
+          <select class="formControl" id="county" formControlName="country" >
+            <option>Spain</option>
+            <option>Canada</option>
+          </select>
+
+        <label for="province" class="col-form-label">Province</label>
+
+          <select class="formControl" id="province" formControlName="province">
+            <option>Madrid</option>
+            <option>Ontario</option>
+          </select>
+
+
+        <label for="city" class="col-form-label" >City</label>
+          <select class="formControl" id="province" formControlName="city" >
+            <option>Madrid</option>
+            <option>Toronto</option>
+          </select>
+        </li>
+
+        <li class="list-group-item">
+
+        <label for="address" class="col-form-label">Address</label>
+
+          <input type="text" class="formControl" id="address" formControlName="address" >
+
+
+        <label for="postal" class=" col-form-label">Postal Code</label>
+
+          <input type="text" class="formControl" id="postal" formControlName="postal" >
+        </li>
+        <li class="list-group-item">
+          <label for="items">Items</label><span name="items" class="btn btn-primary" (click)="addItem()">+</span><span name="items" class="btn btn-primary" (click)="removeItem()">-</span>
+           <div formArrayName="items" *ngFor="let item of invoiceForm.get('items')['controls']; let i = index;">
+  <div [formGroupName]=  "i">
+    <input formControlName="description" placeholder="Description">
+    <input formControlName="units" placeholder="Units">
+    <input formControlName="quantity" placeholder="quantity">
+    <input formControlName="unitPrice" placeholder="UnitPrice">
+    <input formControlName="tax" placeholder="Tax">
+  </div>
+</div>
+          </li>
+          <li class="list-group-item">
+          <button type="submit" class="btn btn-primary"  >Save Invoice</button>
+          <button  routerLink="/list-invoices" class="btn btn-danger"  >Cancel</button>
+</li>
+      </ul>
+    </form>
+  </div>
+</div>
+
+

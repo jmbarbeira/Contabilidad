@@ -8,22 +8,23 @@ const invoiceSchema = new mongoose.Schema({
         location:{
             country:{type:String,required:true},
             province: {type:String,required:true},
-            city: {type:String,required:true}
+            city: {type:String,required:true},
+            address: String,
+            postal: String
         },
-        address:String
     },
-    billinDate: Date,
+    billingDate: Date,
     paymentDate: Date,
   
-    items:[{
-            description:{type:String,unique:true},
-            quantity:Number,
-            units: {type:String,enum: ['Hours']},
-            unitPrice:Number,
-            tax:Number,
-            total:Number
-    }],
-    total:Number
+     items:[{
+             description:{type:String,unique:true},
+             units: {type:String,enum: ['Hours']},
+             quantity:Number,
+             unitPrice:Number,
+             tax:Number,
+             total:Number
+     }],
+     total:Number
      
 })
 
